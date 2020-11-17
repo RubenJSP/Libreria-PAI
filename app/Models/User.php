@@ -58,4 +58,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    //User has many Loans
+    public function loans(){
+        
+    }
 }
