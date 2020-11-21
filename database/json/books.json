@@ -1,0 +1,26 @@
+[
+    {
+        "title":"Halo: The Fall of Reach",
+        "description":"Halo: The Fall of Reach es una novela de ciencia ficción escrita en el 2001 por Eric Nylund, basada en la serie de videojuegos Halo, precuela de Halo: Combat Evolved",
+        "year":2001,
+        "pages":250,
+        "isbn":"BK01",
+        "editorial":"Del Rey Books",
+        "edition":"1",
+        "autor":"Eric Nylund",
+        "cover":"Halo.png",
+        "category_id":"3"
+    },
+    {
+        "title":"It (eso)",
+        "description":"It es una novela de terror publicada en 1986 por el escritor estadounidense Stephen King.",
+        "year":1986,
+        "pages":1138,
+        "isbn":"BK02",
+        "editorial":"Viking Press",
+        "edition":"1",
+        "autor":"Stephen King",
+        "cover":"it.png",
+        "category_id":"1"
+    }
+]   

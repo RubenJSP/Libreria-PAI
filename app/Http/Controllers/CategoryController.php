@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -35,7 +36,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
+        ]);
+        if ($validator->fails()) {
+            return  redirect()->back()->with('error', "Invalid fields, couldn't create category");
+
+        }
+        if($category = Category::create($request->all())){
+            return  redirect()->back()->with('success', 'Category created successfully');
+        }
+        return  redirect()->back()->with('error', "Sorry, couldn't create category");
     }
 
     /**
@@ -67,9 +79,21 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
+        ]);
+        if ($validator->fails()) {
+            return  redirect()->back()->with('error', "Invalid fields, couldn't edit category");
+
+        }
+        $category = Category::find($request['id']);
+        if($category->Update($request->all())){
+            return  redirect()->back()->with('success', 'Category created successfully');
+        }
+        return  redirect()->back()->with('error', "Sorry, couldn't update category");
     }
 
     /**
@@ -80,6 +104,17 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if($category){
+            if($category->delete()){
+                return response()->json([
+                    'message' => 'Category deleted successfully', 
+                    'code' => '200'
+                ]);
+            }
+            return response()->json([
+                    'message' => "Sorry, coudn't delete category", 
+                    'code' => '400'
+                ]);
+        }
     }
 }

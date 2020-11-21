@@ -20,7 +20,7 @@ class CreateLoansTable extends Migration
             $table->unsignedBigInteger('book_id')->nulleable();
             $table->foreign('book_id')->references('id')->on('books');
             $table->date('loan_date')->default(\Carbon\Carbon::now());
-            $table->date('return_date')->default(\Carbon\Carbon::now());
+            $table->date('return_date')->default(\Carbon\Carbon::now()->addDays(3));
             $table->boolean('state')->default(false);
             $table->timestamps();
         });

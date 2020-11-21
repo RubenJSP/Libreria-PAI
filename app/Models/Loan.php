@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Loan extends Model
 {
     use HasFactory;
-    protected $table = 'loan';
     /**
      * The attributes that are mass assignable.
      *
@@ -22,10 +21,10 @@ class Loan extends Model
         'state'
     ];
     public function users(){
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
     public function books()
     {
-        return $this->belongsTo('App\Book', 'book_id');
+        return $this->belongsTo('App\Models\Book', 'book_id');
     }
 }

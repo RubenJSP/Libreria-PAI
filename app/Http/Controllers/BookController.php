@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Loan;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -14,7 +15,19 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $bookData = Book::all();
+        $loans =Loan::with('users','books.Category')->get();
+        $books = $bookData;
+        foreach($bookData as $index=>$bookdata){
+            $books[$index]['status'] = "0";
+            foreach($loans as $loan){ 
+               if($bookdata->id == $loan->books->id && $loan->state == 1)
+                    $books[$index]['status'] = "1";
+                else if($loan->state == 0)
+                    $books[$index]['status'] = "0";
+           }
+        }
+        return view('vistaAqui',compact('books'));
     }
 
     /**

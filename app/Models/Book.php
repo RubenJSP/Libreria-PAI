@@ -13,7 +13,6 @@ class Book extends Model
      *
      * @var array
      */
-    protected $table = 'book';
     protected $fillable = [
         'title',
         'description',
@@ -29,6 +28,6 @@ class Book extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Category', 'category_id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
 }

@@ -20,3 +20,10 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/info','LoanController@index');
+    Route::post('/loan', 'LoanController@store');
+    Route::put('/loan', 'LoanController@update');
+    Route::post('/categories', 'CategoryController@store');
+});
