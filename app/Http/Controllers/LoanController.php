@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Loan;
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 class LoanController extends Controller
 {
     /**
@@ -29,7 +31,25 @@ class LoanController extends Controller
     {
         //
     }
-
+    /**
+     * Return the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function data(){
+        $loans = DB::table('loans')
+        ->select('loan_date as date', DB::raw('count(*) as loans'))
+        ->groupBy('loan_date')
+        ->get();
+        $returns = DB::table('loans')
+        ->select('loan_date as date', DB::raw('count(*) as returned'))->where('state',"=",0)
+        ->groupBy('loan_date')
+        ->get();
+        return Response::json(array(
+            'loans' => $loans,
+            'returns' => $returns,
+        ));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -99,12 +119,10 @@ class LoanController extends Controller
                 return  redirect()->back()->with('error', 'Oops! Something went wrong'); 
             } 
             $loan = Loan::find($request['id']);
-            if($loan){
-                $loan->Update(['state' => 0]);
+            if($loan->Update(['state' => 0]))
                 return  redirect()->back()->with('success', 'Thank you!, you have returned the book');
-            }
-             else
-                return redirect()->back()->with('error', 'Sorry, book not returned, please try again'); 
+
+            return redirect()->back()->with('error', 'Sorry, book not returned, please try again'); 
     }
 
     /**

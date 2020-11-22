@@ -22,8 +22,21 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/info','LoanController@index');
+    //Book routes
+    Route::get('/info','BookController@index');
+    Route::post('/books', 'BookController@store');
+    Route::put('/books', 'BookController@update');
+    Route::delete('/books/{book}', 'BookController@destroy');
+    //Loan routes
+    Route::post('/loan', 'LoanController@index');
     Route::post('/loan', 'LoanController@store');
     Route::put('/loan', 'LoanController@update');
-    Route::post('/categories', 'CategoryController@store');
+    Route::get('/data','LoanController@data');
+    Route::delete('/loan/{loan}', 'LoanController@destroy');
+    //Categories routes
+    Route::get('/categories', 'CategoryController@index'); 
+    Route::post('/categories','CategoryController@store');
+    Route::put('/categories','CategoryController@update');
+    Route::delete('/categories/{category}','CategoryController@destroy');
+
 });

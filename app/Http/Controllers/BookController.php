@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Loan;
+use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class BookController extends Controller
 {
     /**
@@ -18,6 +19,7 @@ class BookController extends Controller
         $bookData = Book::all();
         $loans =Loan::with('users','books.Category')->get();
         $books = $bookData;
+        $categories = Category::all();
         foreach($bookData as $index=>$bookdata){
             $books[$index]['status'] = "0";
             foreach($loans as $loan){ 
@@ -27,7 +29,7 @@ class BookController extends Controller
                     $books[$index]['status'] = "0";
            }
         }
-        return view('vistaAqui',compact('books'));
+        return view('info',compact('books','categories'));
     }
 
     /**
@@ -48,7 +50,35 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          //Validar los datos del request
+          $validator = Validator::make($request->all(), [
+            'title'=>'required|max:255',
+            'description'=>'required|max:255',
+            'year'=>'required|numeric',
+            'pages'=>'required|numeric',
+            'isbn'=>'required|unique',
+            'editorial'=>'required',
+            'edition'=>'required|numeric',
+            'autor'=>'required',
+            'cover'=>'mimes:jpeg,jpg,png,gif',
+            'category_id' => 'required',
+        ]);
+        //En caso de no ser válidos, se regresa con una respuesta de error
+        if ($validator->fails()) {
+            return  redirect()->back()->with('error', 'Oops! Something went wrong'); 
+        } 
+        if($book = Book::create($request->all())){
+            if ($request->hasFile('cover')) {
+                $file = $request->file('cover');
+                $fileName = 'book_cover'.$book->id.'.'.$file->getClientOriginalExtension();
+                $path = $request->file('cover')->storeAs('img/books',$fileName);
+            }
+            $book->cover = $fileName;
+            $book->save();
+            return  redirect()->back()->with('success', 'Book created successfully');
+        }
+        return  redirect()->back()->with('error', "Sorry, couldn't create book");
+        
     }
 
     /**
@@ -82,7 +112,37 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+             //Validar los datos del request
+             $validator = Validator::make($request->all(), [
+                'id' => 'required|numeric',
+                'title'=>'required|max:255',
+                'description'=>'required|max:255',
+                'year'=>'required|numeric',
+                'pages'=>'required|numeric',
+                'isbn'=>'required',
+                'editorial'=>'required',
+                'edition'=>'required|numeric',
+                'autor'=>'required',
+                'cover'=>'mimes:jpeg,jpg,png,gif',
+                'category_id' => 'required',
+            ]);
+            //En caso de no ser válidos, se regresa con una respuesta de error
+            if ($validator->fails()) {
+                return  redirect()->back()->with('error', 'Oops! Something went wrong'); 
+            } 
+            $book = Book::find($request['id']);
+            if($book->Update($request->all())){
+                if ($request->hasFile('cover')) {
+                    $file = $request->file('cover');
+                    $fileName = 'book_cover'.$book->id.'.'.$file->getClientOriginalExtension();
+                    $path = $request->file('cover')->storeAs('img/books',$fileName);
+                    $book->cover = $fileName;
+                    $book->save();
+                }
+                return  redirect()->back()->with('success', 'The book has been updated');
+            }
+
+            return redirect()->back()->with('error', 'Sorry, book not updated, try again'); 
     }
 
     /**
@@ -93,6 +153,17 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        if($book){
+            if($book->delete()){
+                return response()->json([
+                    'message' => 'Book deleted successfully', 
+                    'code' => '200'
+                ]);
+            }
+            return response()->json([
+                    'message' => "Sorry, coudn't delete the book", 
+                    'code' => '400'
+                ]);
+        }
     }
 }

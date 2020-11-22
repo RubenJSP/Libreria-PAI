@@ -90,9 +90,9 @@ class CategoryController extends Controller
 
         }
         $category = Category::find($request['id']);
-        if($category->Update($request->all())){
+        if($category->Update($request->all()))
             return  redirect()->back()->with('success', 'Category created successfully');
-        }
+        
         return  redirect()->back()->with('error', "Sorry, couldn't update category");
     }
 
