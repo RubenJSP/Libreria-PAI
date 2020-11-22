@@ -17,7 +17,7 @@ class BookController extends Controller
     public function index()
     {
         $bookData = Book::all();
-        $loans =Loan::with('users','books.Category')->get();
+        $loans =Loan::where('state',1)->with('users','books.Category')->get();
         $books = $bookData;
         $categories = Category::all();
         foreach($bookData as $index=>$bookdata){
@@ -29,7 +29,7 @@ class BookController extends Controller
                     $books[$index]['status'] = "0";
            }
         }
-        return view('info',compact('books','categories'));
+        return view('info',compact('books','categories','loans'));
     }
 
     /**

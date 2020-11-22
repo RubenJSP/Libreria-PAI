@@ -49,13 +49,44 @@
                                         update
                                       </button>
                                     @endif
-                                   
                                 </td>
                                 <td>
                                     <div>
                                         <img src="{{asset('img/books/'.$book->cover)}}" class="rounded float-left" alt="cover">
                                     </div>
                                 </td>
+                             </tr>
+                         @endforeach
+                     @endif
+                    </tbody>
+                  </table>
+                    <h3 class="h3"> RETURN BOOKS</h3>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tittle</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     @if(@isset($loans) && count($loans)>0)
+                         @foreach ($loans as $loan)
+                             <tr> 
+                                 <th scope = "row">
+                                     {{$loan->id}}
+                                 </th>
+                                 <td>
+                                    {{$loan->books->title}}
+                                 </td>
+                                 <td>
+                                    <form action="{{url('loan')}}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="id" value="{{$loan->id}}">
+                                        <button type="submit" class="btn btn-primary">RETURN BOOK</button>
+                                    </form>
+                                 </td>
                              </tr>
                          @endforeach
                      @endif
