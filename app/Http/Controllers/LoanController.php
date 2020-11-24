@@ -19,7 +19,7 @@ class LoanController extends Controller
     public function index()
     {
         $loans =Loan::with('users','books.Category')->get();
-        return view('vistaAqui',compact('loans'));
+        return view('loans.index',compact('loans'));
     }
 
     /**
