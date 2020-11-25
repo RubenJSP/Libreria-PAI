@@ -24,19 +24,16 @@
 	                                    	<div class="bg-success rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Returned
 	                                    </h6>
 	                                @elseif($loan->state == 1)
-                                        @if(isset($loan->on_time))
-                                            @if($loan->on_time == 0)
-	                                       <h6 class="text-danger text-right  my-0">
-	                                           <div class="bg-danger rounded-circle d-inline-block" style="width: 10px; height: 10px">
-                                            @else
-                                            <h6 class="text-warning text-right  my-0">
-                                                <div class="bg-warning rounded-circle d-inline-block" style="width: 10px; height: 10px">
-                                            @endif
-                                        @endif
-                                                </div> Borrowed
+                                        @if(isset($loan->on_time) && $loan->on_time == 0)
+                                            <h6 class="text-danger text-right  my-0">
+	                                           <div class="bg-danger rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Borrowed
                                             </h6>
-	                                @endif
-                                            
+                                        @else
+                                            <h6 class="text-warning text-right  my-0">
+                                                <div class="bg-warning rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Borrowed
+                                            </h6>
+                                        @endif
+	                                @endif  
                                     <h5 class="card-title break-text"><b>{{$loan->books->title}}</b></h5>
                                     <div class="row no-gutters">
                                         <div class="col">
