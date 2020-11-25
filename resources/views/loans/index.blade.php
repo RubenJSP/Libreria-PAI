@@ -21,13 +21,22 @@
                                 <div class="card-body py-1 px-2">
                                 	@if($loan->state == 0)
                                    		<h6 class="text-success text-right  my-0">
-	                                    	<div class="bg-success rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Delivered
+	                                    	<div class="bg-success rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Returned
 	                                    </h6>
-	                                @else
-	                                	<h6 class="text-warning text-right  my-0">
-	                                    	<div class="bg-warning rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Borrowed
-	                                    </h6>
+	                                @elseif($loan->state == 1)
+                                        @if(isset($loan->on_time))
+                                            @if($loan->on_time == 0)
+	                                       <h6 class="text-danger text-right  my-0">
+	                                           <div class="bg-danger rounded-circle d-inline-block" style="width: 10px; height: 10px">
+                                            @else
+                                            <h6 class="text-warning text-right  my-0">
+                                                <div class="bg-warning rounded-circle d-inline-block" style="width: 10px; height: 10px">
+                                            @endif
+                                        @endif
+                                                </div> Borrowed
+                                            </h6>
 	                                @endif
+                                            
                                     <h5 class="card-title break-text"><b>{{$loan->books->title}}</b></h5>
                                     <div class="row no-gutters">
                                         <div class="col">
@@ -39,7 +48,7 @@
                                     </div>
                                     <div class="row no-gutters">
                                         <div class="col">
-                                            <h6>Return date:</h6>
+                                            <h6>@if($loan->state == 1) Return date:@else Returned: @endif</h6>
                                         </div>
                                         <div class="col">
                                             <h6 class="text-right" title="Tentative return date">{{$loan->return_date}}*</h6>
