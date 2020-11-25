@@ -36,7 +36,7 @@
             <main>
                 <section>
                     <div class="row">
-                        <div class="d-flex justify-content-center">
+                        <div class="col d-flex justify-content-center">
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>{{session('success')}}</strong> 

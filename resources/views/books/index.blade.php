@@ -26,7 +26,7 @@
                                 <div class="card-footer bg-transparent py-2">
                                     <button class="btn btn-block border-primary float-right text-primary mb-2" data-toggle="modal" data-target="#detailsModal" onclick="showDetails({{$book}},{{$book->category}})">More info</button>
                                     @if($book->status == 0)
-                                        <form {{--action="{{url('loan')}}"--}} method="POST">
+                                        <form action="{{url('loan')}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="id" value="{{$book->id}}">
                                             <button type="submit" class="btn btn-block btn-primary">Get</button>

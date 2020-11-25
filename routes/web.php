@@ -23,7 +23,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     //Book routes
-    Route::get('/info','BookController@index');
+    Route::get('/books','BookController@index');
     Route::get('/books','BookController@index');
     Route::post('/books', 'BookController@store');
     Route::put('/books', 'BookController@update');

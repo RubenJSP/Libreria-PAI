@@ -20,17 +20,18 @@ class BookController extends Controller
         $loans =Loan::where('state',1)->with('users','books.Category')->get();
         $books = $bookData;
         $categories = Category::all();
+
         foreach($bookData as $index=>$bookdata){
             $books[$index]['status'] = "0";
             foreach($loans as $loan){ 
                if($bookdata->id == $loan->books->id && $loan->state == 1)
                     $books[$index]['status'] = "1";
                 else if($loan->state == 0)
-                    $books[$index]['status'] = "0";
+                    $books[$index]['status'] = "0";      
            }
         }
-        return view('info',compact('books','categories','loans'));
-        //return view('books.index',compact('books','categories','loans'));
+        //return view('info',compact('books','categories','loans'));
+        return view('books.index',compact('books','categories','loans'));
     }
 
     /**

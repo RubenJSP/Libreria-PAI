@@ -43,14 +43,18 @@
                                         </div>
                                         <div class="col">
                                             <h6 class="text-right" title="Tentative return date">{{$loan->return_date}}*</h6>
+                                            @if(isset($loan->on_time) && $loan->on_time == 0)   
+                                               {{--SI EL LIBRO SE ENTREGÓ TARDE--}}
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer bg-transparent py-2">
                                     @if($loan->state == 1)
-                                        <form {{--action="{{url('loan')}}"--}} method="POST">
+                                        <form action="{{url('loan')}}" method="POST">
                                             @csrf
-                                            <input type="hidden" name="id" value="{{$loan->book_id}}">
+                                            @method('PUT')
+                                            <input type="hidden" name="id" value="{{$loan->id}}">
                                             <button type="submit" class="btn btn-block btn-primary">Back</button>
                                         </form>
                                     @else

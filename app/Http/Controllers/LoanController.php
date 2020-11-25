@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Carbon\Carbon;
 class LoanController extends Controller
 {
     /**
@@ -18,7 +19,12 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loans =Loan::with('users','books.Category')->get();
+        $query =Loan::with('users','books.Category')->get();
+        $loans = $query;
+        foreach($query as $index=>$loan){
+            if(Carbon::now()->gt(Carbon::parse($loan->return_date)))
+                $loans[$index]['on_time'] = "0";
+        }
         return view('loans.index',compact('loans'));
     }
 
@@ -105,7 +111,6 @@ class LoanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Loan  $loan
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -119,9 +124,11 @@ class LoanController extends Controller
                 return  redirect()->back()->with('error', 'Oops! Something went wrong'); 
             } 
             $loan = Loan::find($request['id']);
-            if($loan->Update(['state' => 0]))
+            $data = ['state' => 0,
+                    'return_date' => Carbon::now()];
+            if($loan->Update($data)){
                 return  redirect()->back()->with('success', 'Thank you!, you have returned the book');
-
+            }
             return redirect()->back()->with('error', 'Sorry, book not returned, please try again'); 
     }
 

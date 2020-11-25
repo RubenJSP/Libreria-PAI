@@ -8,7 +8,7 @@
         "editorial":"Del Rey Books",
         "edition":"1",
         "autor":"Eric Nylund",
-        "cover":"Halo.png",
+        "cover":"book.png",
         "category_id":"3"
     },
     {
@@ -20,7 +20,7 @@
         "editorial":"Viking Press",
         "edition":"1",
         "autor":"Stephen King",
-        "cover":"it.png",
+        "cover":"book.png",
         "category_id":"1"
     }
 ]   
