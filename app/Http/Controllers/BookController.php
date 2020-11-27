@@ -33,7 +33,7 @@ class BookController extends Controller
            }
         }
         return view('info',compact('books','categories','loans'));
-        //return view('books.index',compact('books','categories','loans'));
+        //return view('books.admin',compact('books','categories','loans'));
     }
 
     /**
