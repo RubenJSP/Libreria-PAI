@@ -6,10 +6,10 @@ use App\Models\Loan;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
+use Auth;
 class LoanController extends Controller
 {
     /**
@@ -19,13 +19,18 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $query =Loan::with('users','books.Category')->get();
-        $loans = $query;
-        foreach($query as $index=>$loan){
-            if(Carbon::now()->gt(Carbon::parse($loan->return_date)))
-                $loans[$index]['on_time'] = "0";
-        }
-        return view('loans.index',compact('loans'));
+        $query = '';
+        if(Auth::user()->role_id == 1) //Si es administrador
+            $query =Loan::with('users','books.Category')->get();
+        else //Si es cliente
+            $query =Loan::with('users','books.Category')->where('user_id',Auth::user()->id)->get();
+
+            $loans = $query;
+            foreach($query as $index=>$loan){
+                if(Carbon::now()->gt(Carbon::parse($loan->return_date)))
+                    $loans[$index]['on_time'] = "0";
+            }
+            return view('loans.index',compact('loans'));
     }
 
     /**

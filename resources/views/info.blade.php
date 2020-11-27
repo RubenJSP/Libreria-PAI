@@ -22,7 +22,7 @@
                     <tbody>
                      @if(@isset($books) && count($books)>0)
                          @foreach ($books as $book)
-                             <tr> 
+                             <tr id="Book{{$book->id}}"> 
                                  <th scope = "row">
                                      {{$book->id}}
                                  </th>
@@ -52,7 +52,10 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <img src="{{asset('img/books/'.$book->cover)}}" class="rounded float-left" alt="cover">
+                                      <button  type="button" class="btn btn-primary float-right" onclick="deleteRecord('Book','{{url('books')}}',{{$book->id}})"> 
+                                      DELETE
+                                    </button>
+                                      
                                     </div>
                                 </td>
                              </tr>
@@ -72,7 +75,7 @@
                     <tbody>
                      @if(@isset($loans) && count($loans)>0)
                          @foreach ($loans as $loan)
-                             <tr> 
+                             <tr id="Loan{{$loan->id}}" > 
                                  <th scope = "row">
                                      {{$loan->id}}
                                  </th>
@@ -80,12 +83,19 @@
                                     {{$loan->books->title}}
                                  </td>
                                  <td>
+                                   @if($loan->state == 1)
                                     <form action="{{url('loan')}}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="id" value="{{$loan->id}}">
                                         <button type="submit" class="btn btn-primary">RETURN BOOK</button>
+                                        
+  
                                     </form>
+                                    @endif
+                                    <button  type="button" class="btn btn-primary float-right" onclick="deleteRecord('Loan','{{url('loan')}}',{{$loan->id}})">
+                                      DELETE
+                                    </button>
                                  </td>
                              </tr>
                          @endforeach
@@ -268,6 +278,7 @@
                     </div>
                 </form>
             </x-jet-authentication-card>
+            <x-slot name="scripts">
                 <script>
                         function edit(data){
                             $('#id').val(data['id'])
@@ -281,4 +292,5 @@
                             $('#autor').val(data['autor'])
                         }
               </script>
+            </x-slot>
 </x-app-layout>

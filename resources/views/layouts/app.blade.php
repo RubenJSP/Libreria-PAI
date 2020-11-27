@@ -31,7 +31,6 @@
                     {{ $header }}
                 </div>
             </header>
-
             <!-- Page Content -->
             <main>
                 <section>
@@ -73,6 +72,7 @@
         <script src="https://cdn.jsdelivr.net/npm/v-charts/lib/index.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-charts/lib/style.min.css">
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="{{ asset('js/deleteRecord.js')}}"></script>
         {{(isset($scripts))?$scripts:''}}
     </body>
 </html>
