@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="row">
             <div class="col-md-8 col-12">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-0">
                     {{ __('Books') }}
                 </h2>
             </div>
@@ -13,7 +13,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <div class="row row-cols-1 row-cols-md-4 no-gutters p-2">
-                @if(@isset($books) && count($books)>0)
+                @if(isset($books) && count($books)>0)
                     @foreach ($books as $book)
                         <div class="col mb-4 d-flex p-2">
                             <div class="shadow card mx-auto" style="width: 16rem;">
@@ -21,7 +21,7 @@
                                 <div class="card-body py-1 px-2">
                                     <h5 class="card-title break-text"><b>{{$book->title}}</b></h5>
                                     <h6 class="my-1">{{$book->autor}}</h6>
-                                    <p class="card-text mb-0 text-justify">{{Str::limit($book->description, 100, '...')}}{{--<button class="border-primary float-right text-primary mb-2" data-toggle="modal" data-target="#addBookModal">More info</button>--}}</p>
+                                    <p class="card-text mb-0 text-justify">{{Str::limit($book->description, 100, '...')}}</p>
                                 </div>
                                 <div class="card-footer bg-transparent py-2">
                                     <button class="btn btn-block border-primary float-right text-primary mb-2" data-toggle="modal" data-target="#detailsModal" onclick="showDetails({{$book}},{{$book->category}})">More info</button>
@@ -34,7 +34,6 @@
                                     @else
                                       <button type="submit" disabled class="btn btn-block btn-disabled border-dark">Not available</button>
                                     @endif
-                                    {{--<button class="btn btn-light btn-block mt-2" data-toggle="modal" data-target="#addBookModal">More info</button>--}}
                                 </div>
                                 
                             </div>
