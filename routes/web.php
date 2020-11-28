@@ -23,23 +23,24 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     //Book routes
-    Route::get('/books','BookController@index');
+    Route::get('/books','BookController@index')->name('books');;
     Route::get('/books','BookController@index');
     Route::post('/books', 'BookController@store');
     Route::put('/books', 'BookController@update');
     Route::delete('/books/{book}', 'BookController@destroy');
     //Loan routes
-    Route::get('/loan','LoanController@index');
+    Route::get('/loan','LoanController@index')->name('loans');
     Route::post('/loan', 'LoanController@store');
     Route::put('/loan', 'LoanController@update');
     Route::get('/data','LoanController@data');
     Route::delete('/loan/{loan}', 'LoanController@destroy');
     //Categories routes
-    Route::get('/categories', 'CategoryController@index'); 
+    Route::get('/categories', 'CategoryController@index')->name('categories');; 
     Route::post('/categories','CategoryController@store');
     Route::put('/categories','CategoryController@update');
     Route::delete('/categories/{category}','CategoryController@destroy');
-    //Register admins
-    Route::post('createAdmin','UserController@store');
+    //User routes
+    Route::get('/users','UserController@index')->name('users');;
+    Route::post('/users','UserController@store');
 
 });

@@ -89,8 +89,7 @@
                                         @method('PUT')
                                         <input type="hidden" name="id" value="{{$loan->id}}">
                                         <button type="submit" class="btn btn-primary">RETURN BOOK</button>
-                                        
-  
+                                      
                                     </form>
                                     @endif
                                     <button  type="button" class="btn btn-primary float-right" onclick="deleteRecord('Loan','{{url('loan')}}',{{$loan->id}})">
@@ -99,9 +98,11 @@
                                  </td>
                              </tr>
                          @endforeach
-                     @endif
-                    </tbody>
-                  </table>
+                         
+                        </tbody>
+                      </table>
+                      
+                  @endif
             </div>
             <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="addBook" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">

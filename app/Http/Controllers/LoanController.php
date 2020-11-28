@@ -7,9 +7,10 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Pagination\Paginator;
 use Carbon\Carbon;
 use Auth;
+use Response;
 class LoanController extends Controller
 {
     /**
@@ -19,18 +20,26 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $query = '';
-        if(Auth::user()->role_id == 1) //Si es administrador
-            $query =Loan::with('users','books.Category')->get();
-        else //Si es cliente
-            $query =Loan::with('users','books.Category')->where('user_id',Auth::user()->id)->get();
+        if(Auth::user()->hasPermissionTo('view loans')){
+            $query = '';
+            if(Auth::user()->role_id == 1) //Si es administrador
+                $query = Loan::with('users','books.Category')
+                ->orderBy('state','DESC') //Ordernar por estado (No devuelto a devuelto)
+                ->orderBy('loan_date','DESC')->get(); //Y ordenar por fecha (Actual a antiguos)
+            else //Si es cliente
+                $query =Loan::with('users','books.Category')
+                ->where('user_id',Auth::user()->id)
+                ->orderBy('state','DESC')
+                ->orderBy('loan_date','DESC')->get();
 
-            $loans = $query;
-            foreach($query as $index=>$loan){
-                if(Carbon::now()->gt(Carbon::parse($loan->return_date)))
-                    $loans[$index]['on_time'] = "0";
-            }
-            return view('loans.index',compact('loans'));
+                $loans = $query;
+                foreach($query as $index=>$loan){
+                    if(Carbon::now()->gt(Carbon::parse($loan->return_date)))
+                        $loans[$index]['on_time'] = "0";
+                }
+                return view('loans.index',compact('loans'));
+        }
+        return redirect()->back()->with("error","You don't have permissions");  
     }
 
     /**
@@ -48,18 +57,21 @@ class LoanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function data(){
-        $loans = DB::table('loans')
-        ->select('loan_date as date', DB::raw('count(*) as loans'))
-        ->groupBy('loan_date')
-        ->get();
-        $returns = DB::table('loans')
-        ->select('loan_date as date', DB::raw('count(*) as returned'))->where('state',"=",0)
-        ->groupBy('loan_date')
-        ->get();
-        return Response::json(array(
-            'loans' => $loans,
-            'returns' => $returns,
-        ));
+        if(Auth::user()->hasPermissionTo('view dashboard')){
+            $loans = DB::table('loans')
+            ->select('loan_date as date', DB::raw('count(*) as loans'))
+            ->groupBy('loan_date')
+            ->get();
+            $returns = DB::table('loans')
+            ->select('loan_date as date', DB::raw('count(*) as returned'))->where('state',"=",0)
+            ->groupBy('loan_date')
+            ->get();
+            return Response::json(array(
+                'loans' => $loans,
+                'returns' => $returns,
+            ));
+        }
+        return redirect()->back()->with("error","You don't have permissions"); 
     }
     /**
      * Store a newly created resource in storage.
@@ -69,25 +81,28 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
-        //Validar los datos del request
-        $validator = Validator::make($request->all(), [
-            'id' => 'required|numeric',
-        ]);
-        //En caso de no ser válidos, se regresa con una respuesta de error
-        if ($validator->fails()) {
+        if(Auth::user()->hasPermissionTo('create loans')){
+            //Validar los datos del request
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|numeric',
+            ]);
+            //En caso de no ser válidos, se regresa con una respuesta de error
+            if ($validator->fails()) {
+                return  redirect()->back()->with('error', 'Oops! Something went wrong'); 
+            } 
+            //Se verifica que el libro solicitado existe
+            if(Book::find($request['id'])){
+                $user_id = Auth::user()->id;
+                $loan = new Loan();
+                $loan->user_id = $user_id;
+                $loan->book_id = $request['id'];
+                $loan->state = true;
+                $loan->save();
+                return  redirect()->back()->with('success', 'Loan has been completed');
+            }
             return  redirect()->back()->with('error', 'Oops! Something went wrong'); 
-        } 
-        //Se verifica que el libro solicitado existe
-        if(Book::find($request['id'])){
-            $user_id = Auth::user()->id;
-            $loan = new Loan();
-            $loan->user_id = $user_id;
-            $loan->book_id = $request['id'];
-            $loan->state = true;
-            $loan->save();
-            return  redirect()->back()->with('success', 'Loan has been completed');
         }
-        return  redirect()->back()->with('error', 'Oops! Something went wrong'); 
+        return redirect()->back()->with("error","You don't have permissions"); 
     }
 
     /**
@@ -120,6 +135,7 @@ class LoanController extends Controller
      */
     public function update(Request $request)
     {
+        if(Auth::user()->hasPermissionTo('edit loans')){
               //Validar los datos del request
             $validator = Validator::make($request->all(), [
                 'id' => 'required|numeric',
@@ -135,6 +151,8 @@ class LoanController extends Controller
                 return  redirect()->back()->with('success', 'Thank you!, you have returned the book');
             }
             return redirect()->back()->with('error', 'Sorry, book not returned, please try again'); 
+        }
+        return redirect()->back()->with("error","You don't have permissions");  
     }
 
     /**
@@ -145,17 +163,20 @@ class LoanController extends Controller
      */
     public function destroy(Loan $loan)
     {
-        if($loan){
-            if($loan->delete()){
+        if(Auth::user()->hasPermissionTo('delete loans')){
+            if($loan){
+                if($loan->delete()){
+                    return response()->json([
+                        'message' => 'Loan deleted successfully', 
+                        'code' => '200'
+                    ]);
+                }
                 return response()->json([
-                    'message' => 'Loan deleted successfully', 
-                    'code' => '200'
-                ]);
+                        'message' => "Sorry, coudn't delete loan", 
+                        'code' => '400'
+                    ]);
             }
-            return response()->json([
-                    'message' => "Sorry, coudn't delete loan", 
-                    'code' => '400'
-                ]);
         }
+        return redirect()->back()->with("error","You don't have permissions");  
     }
 }

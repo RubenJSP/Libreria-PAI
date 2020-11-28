@@ -9,11 +9,11 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <blockquote class="blockquote text-center">
-                    <p class="mb-0"><i class="fas fa-chart-bar"></i> Loans</p>
+                    <p class="mb-0"><i class="fas fa-chart-bar"></i> Stats</p>
                     <footer id="ft1" class="blockquote-footer">Shows the amount of borrowed books in the given dates</footer>
                 </blockquote>
                     <div id="loanChart">
-                        <ve-line :data="chartData"></ve-line>
+                        <ve-line :data="chartData" :settings="chartSettings"></ve-line>
                     </div>
                     <blockquote class="blockquote text-center">
                     <p class="mb-0"><i class="fas fa-chart-bar"></i> Returns</p>
@@ -48,8 +48,6 @@
                     loanData.forEach(loan => {
                         if(returned.date == loan.date)
                             returned.loans = loan.loans
-                        else
-                        returned.loans = 0
                     });
                 });
             }else{
@@ -66,6 +64,10 @@
         new Vue({
             el: '#loanChart',
             data: function() {
+                this.chartSettings = {
+                    metrics: ['loans'],
+                    dimension: ['date']
+                }
                 return {
                     chartData: {
                         columns: ['date', 'loans'],
@@ -76,14 +78,14 @@
         })
         new Vue({
             el: '#returnChart',
-            data () {
-        return {
-            chartData: {
-            columns: ['date', 'loans', 'returned'],
-            rows: returnData
+                data () {
+                return {
+                    chartData: {
+                    columns: ['date', 'loans', 'returned'],
+                    rows: returnData
+                    }
+                }
             }
-        }
-        }
         })
     </script>
     </x-slot>

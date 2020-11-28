@@ -118,7 +118,7 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     { 
-        if(Auth::user()->hasPermissionTo('update books')){
+        if(Auth::user()->hasPermissionTo('edit books')){
             //Validar los datos del request
             $validator = Validator::make($request->all(), [
                'id' => 'required|numeric',
