@@ -22,5 +22,113 @@
         "autor":"Stephen King",
         "cover":"book.png",
         "category_id":"1"
+    },
+    {
+        "title":"Psicosis",
+        "description":"Era una noche oscura y tormentosa; Mary Craine estaba exhausta, perdida, y al límite de sus fuerzas, ansiosa por darse una ducha caliente y encontrar un lugar donde pasar la noche. Cuando el Motel Bates apareció de pronto entre la tormenta, Mary pensó que era su salvación. Las habitaciones eran viejas y húmedas, pero estaban limpias, y el encargado, Norman Bates, parecía un tipo bastante agradable, aunque un poco raro... Después Mary conoció a la madre de Norman. Y el cuchillo de carnicero. La pesadilla acababa de empezar.",
+        "year":1959,
+        "pages":192,
+        "isbn":"8498005620",
+        "editorial":"La Factoría de Ideas",
+        "edition":"4",
+        "autor":"Robert Bloch",
+        "cover":"book.png",
+        "category_id":"1"
+    },
+    {
+        "title":"Psicosis II",
+        "description":"Era una noche oscura y tormentosa; Mary Craine estaba exhausta, perdida, y al límite de sus fuerzas, ansiosa por darse una ducha caliente y encontrar un lugar donde pasar la noche. Cuando el Motel Bates apareció de pronto entre la tormenta, Mary pensó que era su salvación. Las habitaciones eran viejas y húmedas, pero estaban limpias, y el encargado, Norman Bates, parecía un tipo bastante agradable, aunque un poco raro... Después Mary conoció a la madre de Norman. Y el cuchillo de carnicero. La pesadilla acababa de empezar.",
+        "year":1982,
+        "pages":288,
+        "isbn":"9788498006018",
+        "editorial":"La Factoría de Ideas",
+        "edition":"2",
+        "autor":"Robert Bloch",
+        "cover":"book.png",
+        "category_id":"1"
+    },
+    {
+        "title" : "Misery",
+        "description" : "Un escritor sufre un grave accidente y recobra el conocimiento en una apartada casa en la que vive una misteriosa mujer, corpulenta y de extraño carácter. Se trata de una antigua enfermera, involucrada en varias muertes misteriosas ocurridas en diversos hospitales. Esta mujer es capaz de los mayores horrores, y el escritor, con las piernas rotas y entre terribles dolores, tiene que luchar por su vida.",
+        "year" : 1980,
+        "pages" : 376,
+        "isbn" : "9786073110037",
+        "editorial" : "Planeta",
+        "edition" : 1,
+        "autor" : "Stephen King",
+        "cover" : "book.png",
+        "category_id": "1"
+    },
+    {
+        "title" : "El marciano",
+        "description" : "Seis días atrás el astronauta Mark Watney se convirtió en uno de los primeros hombres en caminar por la superficie de Marte. Ahora está seguro de que será el primer hombre en morir allí. La tripulación de la nave en que viajaba se ve obligada a evacuar el planeta a causa de una tormenta de polvo, dejando atrás a Mark tras darlo por muerto. Pero él está vivo, y atrapado a millones de kilómetros de cualquier ser humano, sin posibilidad de enviar señales a la Tierra.",
+        "year" : 2013,
+        "pages" : 408,
+        "isbn" : "9788466655057",
+        "editorial" : "Penguin Random House",
+        "edition" : 1,
+        "autor" : "Andy Weir",
+        "cover" : "book.png",
+        "category_id": "3"
+    },
+    {
+        "title" : "Las aventuras de Tom Sawyer",
+        "description" : "Alguien ha dicho que Las aventuras de Tom Sawyer es, ante todo, un libro de memorias. Y, en efecto, el relato de las cosas que le suceden a Tom Sawyer en esa pequeña ciudad a orillas del Mississippi bien puede ser una rememoración de la niñez de Mark Twain. A través de los ojos de sus personajes, el autor nos ofrece la visión de una doble realidad: la del mundo infantil, primitivo, que el lector adulto ya ha perdido, y la del mundo adulto, confuso e ilógico, asentado en unas convenciones que no resultan ser preferibles en ningún aspecto a los códigos de valor de un niño. Es esta una novela que no olvidará ningún lector joven y que acaso hará recordar y sonreír al adulto.",
+        "year" : 2005,
+        "pages" : 320,
+        "isbn" : "9788466745284",
+        "editorial" : "Anaya",
+        "edition" : 1,
+        "autor" : "Mark Twain",
+        "cover" : "book.png",
+        "category_id": "3"
+    },
+    {
+        "title":"Viaje al centro de la tierra",
+        "description":"Un jeroglífico medieval casi indescifrable puede permanecer luengos siglos durmiendo entre las hojas de un libro viejo. Pero, cuando por azar caiga en manos del audaz profesor Otto Lidenbrock de Hamburgo, desencadenará el viaje más espectacular de todo el siglo XIX. El profesor, su sobrino Axel y el impasible Hans verán maravillas en el interior del globo, iluminados por una inmóvil luz incomprensible",
+        "year":2018,
+        "pages":368,
+        "isbn":"9786070749094",
+        "editorial":"Austral",
+        "edition":"1",
+        "autor":"Jules Verne",
+        "cover":"book.png",
+        "category_id":"3"
+    },
+    {
+        "title":"El murmullo de las abejas",
+        "description":"En Linares, al norte del país, con la Revolución mexicana como telón de fondo. Un buen día, la vieja nana de la familia abandona sorpresivamente un reposo que parecía eterno para perderse en el monte. Cuando la encuentran, sostiene dos pequeños bultos, uno en cada brazo: de un lado un bebé deforme y del otro un panal de abejas. Ante la insistencia de la nana por conversar y cuidar al pequeño, la familia Morales decide adoptarlo. Cubierto por el manto vivo de abejas que lo acompañarán y guiarán para siempre, Simonopio llega a cambiar la historia de la familia que lo acoge y la de toda una región.",
+        "year":2015,
+        "pages":488,
+        "isbn":"9786073156035",
+        "editorial":"Penguin Random House",
+        "edition":"1",
+        "autor":"Sofía Segovia",
+        "cover":"book.png",
+        "category_id":"5"
+    },
+    {
+        "title":"Lunas de Estambul",
+        "description":"Ventura, una hermosa joven turca, tiene que viajar a México para casarse con Lázaro porque su familia lo ha dispuesto así. Con un baúl con apenas pertenencias y la ilusión de enfrentarse a lo desconocido, se embarcará en un viaje sorprendente para comenzar una nueva vida lejos de su tierra natal.",
+        "year":2019,
+        "pages":408,
+        "isbn":"9786070761249",
+        "editorial":"Planeta",
+        "edition":"1",
+        "autor":"Sophie Goldberg",
+        "cover":"book.png",
+        "category_id":"5"
+    },
+    {
+        "title":"Cállate niña",
+        "description":"Entre los ensayos de ballet, las peleas con su madre y el constante deseo de escapar, ella encuentra en el cuerpo de los otros el suyo; lo conoce y lo vive a través de ellos. Lo lleva a los excesos y a la perdición con tal de descubrir quién es, hasta que conoce a Antonio y comienza el principio del fin.",
+        "year":2017,
+        "pages":280,
+        "isbn":"9786070744433",
+        "editorial":"Planeta",
+        "edition":"1",
+        "autor":"Rodolfo Naró",
+        "cover":"book.png",
+        "category_id":"2"
     }
 ]   

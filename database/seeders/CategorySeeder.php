@@ -32,5 +32,10 @@ class CategorySeeder extends Seeder
         $category->name = "Aventura";
         $category->description = "La novela de aventuras es un género narrativo literario que narra los viajes, el misterio y el riesgo.";
         $category->save();
+
+        $category = new Category();
+        $category->name = "Ficción";
+        $category->description = "Simulación de la realidad que realizan las obras literarias, cinematográficas, historietísticas, de animación u de otro tipo, cuando presentan un mundo imaginario al receptor.";
+        $category->save();
     }
 }
