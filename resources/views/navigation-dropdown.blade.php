@@ -23,10 +23,10 @@
                             {{ __('Dashboard') }}
                         </x-jet-nav-link>
                     @endif
-                    <x-jet-nav-link href="{{ url('/books') }}">
-                        {{ __('TESTS') }}
+                    <x-jet-nav-link href="{{ route('books') }}" :active="request()->routeIs('books')">
+                        {{ __('Books') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ url('/loan') }}">
+                    <x-jet-nav-link href="{{ route('loans') }}" :active="request()->routeIs('loans')">
                         {{ __('Loans') }}
                     </x-jet-nav-link>
                     @if(Auth::user()->hasPermissionTo('crud categories'))
@@ -137,9 +137,6 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-jet-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -157,9 +154,40 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
+                <div class="block px-4 pb-0 pt-2 text-xs text-gray-400">
+                    {{ __('Manage Account') }}
+                </div>
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
+
+                <div class="border-t border-gray-100"></div>
+
+                <!-- options responsive menu -->
+                <div class="block px-4 pb-0 pt-2 text-xs text-gray-400">
+                    {{ __('Menu') }}
+                </div>
+                @if(Auth::user()->hasPermissionTo('view dashboard'))
+                    <x-jet-responsive-nav-link href="{{ route('dashboard') }}">
+                        {{ __('Dashboard') }}
+                    </x-jet-responsive-nav-link>
+                @endif
+
+                <x-jet-responsive-nav-link href="{{ url('books') }}">
+                    {{ __('Books') }}
+                </x-jet-responsive-nav-link>
+
+                <x-jet-responsive-nav-link href="{{ url('loan') }}">
+                    {{ __('Loans') }}
+                </x-jet-responsive-nav-link>
+
+                @if(Auth::user()->hasPermissionTo('crud categories'))
+                    <x-jet-responsive-nav-link href="{{ url('categories') }}">
+                        {{ __('Categories') }}
+                    </x-jet-responsive-nav-link>
+                @endif
+
+                <div class="border-t border-gray-100"></div>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
