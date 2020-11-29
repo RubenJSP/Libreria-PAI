@@ -119,13 +119,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         if(Auth::user()->hasPermissionTo('delete books')){
-            $user = User::find($id);
             if($user!=null){
                 //Se elimian TODOS los préstamos ligados al usuario
                 Loan::where('user_id',$user->id)->delete();

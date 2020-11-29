@@ -17,8 +17,8 @@ function deleteRecord(itemName,url,id){
                     swal(response.data.message, {
                         icon: "success",
                     });
+                    $("#"+itemName+id).remove()
                 }
-                $("#"+itemName+id).remove()
             })
             .catch(function (error) {
                 console.log(error);

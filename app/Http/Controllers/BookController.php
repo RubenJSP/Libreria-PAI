@@ -32,8 +32,8 @@ class BookController extends Controller
                     $books[$index]['status'] = "0";      
            }
         }
-        //return view('info',compact('books','categories','loans'));
-        return view('books.admin',compact('books','categories','loans'));
+        return view('info',compact('books','categories','loans'));
+        //return view('books.admin',compact('books','categories','loans'));
     }
 
     /**
@@ -54,10 +54,9 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request);
         if(Auth::user()->hasPermissionTo('create books')){
             //Validar los datos del request
-            $validator =  Validator::make($request->all(), [
+            $validator = Validator::make($request->all(), [
               'title'=>'required|max:255',
               'description'=>'required|max:255',
               'year'=>'required|numeric',
