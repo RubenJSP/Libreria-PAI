@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     //Loan routes
     Route::get('/loan','LoanController@index')->name('loans');
     Route::put('/loan', 'LoanController@update');
+    Route::post('/loan', 'LoanController@store');
     Route::get('/data','LoanController@data');
     Route::delete('/loan/{loan}', 'LoanController@destroy');
     //Categories routes

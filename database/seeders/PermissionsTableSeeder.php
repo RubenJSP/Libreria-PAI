@@ -18,6 +18,8 @@ class PermissionsTableSeeder extends Seeder
         $admin = Role::create(['name' => 'Admin']);
         $client =  Role::create(['name' => 'User']);
 
+        //Users
+        Permission::create(['name' => 'crud users']);
         //Categories
         Permission::create(['name' => 'crud categories']);
         //Books
@@ -40,6 +42,7 @@ class PermissionsTableSeeder extends Seeder
         $admin->givePermissionTo([
         'view dashboard',
         
+        'crud users',
         'crud categories',
         'view books',
         'edit books',
