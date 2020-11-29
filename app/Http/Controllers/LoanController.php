@@ -73,20 +73,6 @@ class LoanController extends Controller
         }
         return redirect()->back()->with("error","You don't have permissions"); 
     }
-      /**
-     * Store a newly created resource in storage.
-     *
-     * @param  user_id  $user_id
-     * @return \Illuminate\Http\Response
-     */
-
-    public function getLoanByUser($user_id){
-        if(Auth::user()->hasPermissionTo('view users')){
-            $loans = Loan::with('users','books')->where('user_id',$user_id)->get();
-            return $loans->toJson();
-        }
-        return redirect()->back()->with("error","You don't have permissions");
-    }
     /**
      * Store a newly created resource in storage.
      *
