@@ -97,7 +97,7 @@
                 </div>
                 <form method="post" action="{{url('books')}}" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
+                    
                     <div class="modal-body">
 
                         <div class="form-group">

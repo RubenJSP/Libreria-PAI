@@ -54,14 +54,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+       // dd($request);
         if(Auth::user()->hasPermissionTo('create books')){
             //Validar los datos del request
-            $validator = Validator::make($request->all(), [
+            $validator =  Validator::make($request->all(), [
               'title'=>'required|max:255',
               'description'=>'required|max:255',
               'year'=>'required|numeric',
               'pages'=>'required|numeric',
-              'isbn'=>'required|unique',
+              'isbn'=>'required|unique:books',
               'editorial'=>'required',
               'edition'=>'required|numeric',
               'autor'=>'required',
@@ -77,8 +78,8 @@ class BookController extends Controller
                   $file = $request->file('cover');
                   $fileName = 'book_cover'.$book->id.'.'.$file->getClientOriginalExtension();
                   $path = $request->file('cover')->storeAs('img/books',$fileName);
+                  $book->cover = $fileName;
               }
-              $book->cover = $fileName;
               $book->save();
               return  redirect()->back()->with('success', 'Book created successfully');
           }
