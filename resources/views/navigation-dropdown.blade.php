@@ -34,6 +34,12 @@
                             {{ __('Categories') }}
                         </x-jet-nav-link>
                     @endif
+
+                    @if(Auth::user()->hasPermissionTo('crud users'))
+                        <x-jet-nav-link href="{{ url('users') }}">
+                            {{ __('Users') }}
+                        </x-jet-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -48,7 +54,14 @@
                         @else
 
                             <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                <div>@if(Auth::user()->role('Admin')) <i class="fas fa-user-ninja"></i> @else <i class="fas fa-user"></i> @endif {{ Auth::user()->name }}</div>
+                                <div>
+                                    @if(Auth::user()->role_id == 1))
+                                        <i class="fas fa-user-ninja"></i> 
+                                    @else
+                                        <i class="fas fa-user"></i> 
+                                    @endif
+                                    {{ Auth::user()->name }}
+                                </div>
 
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -184,6 +197,12 @@
                 @if(Auth::user()->hasPermissionTo('crud categories'))
                     <x-jet-responsive-nav-link href="{{ url('categories') }}">
                         {{ __('Categories') }}
+                    </x-jet-responsive-nav-link>
+                @endif
+
+                @if(Auth::user()->hasPermissionTo('crud users'))
+                    <x-jet-responsive-nav-link href="{{ url('users') }}">
+                        {{ __('Users') }}
                     </x-jet-responsive-nav-link>
                 @endif
 

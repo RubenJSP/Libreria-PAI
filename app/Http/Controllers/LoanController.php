@@ -37,7 +37,10 @@ class LoanController extends Controller
                     if(Carbon::now()->gt(Carbon::parse($loan->return_date)))
                         $loans[$index]['on_time'] = "0";
                 }
-                return view('loans.index',compact('loans'));
+                if(Auth::user()->role_id == 1)
+                    return view('loans.admin',compact('loans'));
+                else
+                    return view('loans.index',compact('loans'));
         }
         return redirect()->back()->with("error","You don't have permissions");  
     }
