@@ -61,7 +61,7 @@ class BookController extends Controller
             //Validar los datos del request
             $validator = Validator::make($request->all(), [
               'title'=>'required|max:255',
-              'description'=>'required|max:255',
+              'description'=>'required',
               'year'=>'required|numeric',
               'pages'=>'required|numeric',
               'isbn'=>'required|unique:books',
@@ -96,9 +96,13 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($book)
     {
-        //
+        if(Auth::user()->hasPermissionTo('edit books')){
+            $books = Loan::with('users','books')->where('book_id',$book)->orderBy('loan_date','DESC')->get();
+            return view('books.nombreVista',compact('books'));
+        }
+        return redirect()->back()->with("error","You don't have permissions"); 
     }
 
     /**
@@ -126,7 +130,7 @@ class BookController extends Controller
             $validator = Validator::make($request->all(), [
                'id' => 'required|numeric',
                'title'=>'required|max:255',
-               'description'=>'required|max:255',
+               'description'=>'required',
                'year'=>'required|numeric',
                'pages'=>'required|numeric',
                'isbn'=>'required',
@@ -138,6 +142,7 @@ class BookController extends Controller
            ]);
            //En caso de no ser válidos, se regresa con una respuesta de error
            if ($validator->fails()) {
+               dd($validator);
                return  redirect()->back()->with('error', 'Oops! Something went wrong'); 
            } 
            $book = Book::find($request['id']);
