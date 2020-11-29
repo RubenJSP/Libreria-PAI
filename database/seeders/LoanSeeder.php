@@ -20,7 +20,7 @@ class LoanSeeder extends Seeder
             for ($j=0; $j < $loans; $j++) {    
                 $loan = new Loan();
                 $loan->user_id = 1;   
-                $loan->book_id = rand(1,2);
+                $loan->book_id = rand(1,11);
                 $loan->loan_date = Carbon::parse($loan_date);
                 $loan->return_date = Carbon::parse($loan->loan_date)->addDays(3);
                 $loan->state = 0;

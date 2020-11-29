@@ -32,8 +32,8 @@ class BookController extends Controller
                     $books[$index]['status'] = "0";      
            }
         }
-        return view('info',compact('books','categories','loans'));
-        //return view('books.admin',compact('books','categories','loans'));
+        //return view('info',compact('books','categories','loans'));
+        return view('books.admin',compact('books','categories','loans'));
     }
 
     /**

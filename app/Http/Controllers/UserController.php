@@ -18,8 +18,9 @@ class UserController extends Controller
     public function index()
     {
         if(Auth::user()->hasPermissionTo('view users')){
-            $users = Loan::with('users','books')->get();
-            return view('users.index',compact('users'));
+            $loans = Loan::with('users','books')->get();
+            $users = User::orderBy('role_id','ASC')->get();
+            return view('users.index',compact('users','loans'));
         }
         return redirect()->back()->with("error","You don't have permissions"); 
     }

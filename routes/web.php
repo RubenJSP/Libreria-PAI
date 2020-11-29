@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/loan', 'LoanController@store');
     Route::put('/loan', 'LoanController@update');
     Route::get('/data','LoanController@data');
+    Route::get('/loans/get/{user_id}','LoanController@getLoanByUser');
     Route::delete('/loan/{loan}', 'LoanController@destroy');
     //Categories routes
     Route::get('/categories', 'CategoryController@index')->name('categories');; 
@@ -42,5 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     //User routes
     Route::get('/users','UserController@index')->name('users');;
     Route::post('/users','UserController@store');
+    Route::put('/users','UserController@update');
+    Route::delete('/users','UserController@destroy');
 
 });
