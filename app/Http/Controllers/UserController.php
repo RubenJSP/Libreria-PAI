@@ -43,7 +43,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->hasPermissionTo('create users')){
+        if(Auth::user()->hasPermissionTo('view users')){
             $validator = Validator::make($request->all(), [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -68,12 +68,16 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        if(Auth::user()->hasPermissionTo('view users')){
+            $loans = Loan::with('users','books')->where('user_id',$user->id)->orderBy('loan_date','DESC')->get();
+            return view('users.details',compact('user','loans'));
+        }
+        return redirect()->back()->with("error","You don't have permissions"); 
     }
 
     /**

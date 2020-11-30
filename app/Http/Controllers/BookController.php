@@ -98,14 +98,8 @@ class BookController extends Controller
     public function show(Book $book)
     {
         if(Auth::user()->hasPermissionTo('edit books')){
-<<<<<<< HEAD
-            $books = Loan::with('users','books')->where('book_id',$book->id)->orderBy('loan_date','DESC')->get();
-            return view('books.nombreVista',compact('books'));
-=======
             $loans = Loan::with('users','books')->where('book_id',$book->id)->orderBy('loan_date','DESC')->get();
-            $book = Book::with('Category')->where('id',$book->id)->get();
             return view('books.details',compact('book','loans'));
->>>>>>> ba00a19d31bc86887f6dfc18655429ca00545da9
         }
         return redirect()->back()->with("error","You don't have permissions"); 
     }

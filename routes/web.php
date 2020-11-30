@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/categories/{category}','CategoryController@destroy');
     //User routes
     Route::get('/users','UserController@index')->name('users');
+    Route::get('/users/details/{user}', 'UserController@show')->name('detailUsers');
     Route::post('/users','UserController@store');
     Route::put('/users','UserController@update');
     Route::delete('/users/{user}','UserController@destroy');

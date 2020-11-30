@@ -7,6 +7,12 @@
                 </h2>
             </div>
         </div>
+        <style>
+            hr{
+                margin-top: 10px;
+                margin-bottom: 5px;     
+            }
+        </style>
     </x-slot>
 
     <div class="py-3">
@@ -21,12 +27,19 @@
                             <div class="card-body py-1 px-2">
                                 <h4 class="card-title mb-0 font-weight-bold"><p id="titleDetails" class="mb-1"></p></h4>
                                 <h5 class="card-title mb-0 font-weight-bold">Autor: <span id="autorDetails" class="font-weight-normal float-right">{{$book[0]->autor}}</span></h5>
+                                <hr class="style13">
                                 <h6 class="card-title mb-0 font-weight-bold">Year: <span id="yearDetails" class="font-weight-normal float-right">{{$book[0]->year}}</span></h6>
+                                <hr class="style13">
                                 <h6 class="card-title mb-0 font-weight-bold">Category: <span id="categoryDetails" class="font-weight-normal float-right">{{$book[0]->category->name}}</span></h6>
+                                <hr class="style13">
                                 <p class="mb-0 font-weight-bold text-justify">Description: <span class="card-text font-weight-normal" id="descriptionDetails" class="font-weight-normal float-right">{{$book[0]->description}}</span></p>
+                                <hr class="style13">
                                 <h6 class="card-title mb-0 font-weight-bold">Pages: <span id="pagesDetails" class="font-weight-normal float-right">{{$book[0]->pages}}</span></h6>
+                                <hr class="style13">
                                 <h6 class="card-title mb-0 font-weight-bold">Editorial: <span id="editorialDetails" class="font-weight-normal float-right">{{$book[0]->editorial}}</span></h6>
+                                <hr class="style13">
                                 <h6 class="card-title mb-0 font-weight-bold">Edition: <span id="editionDetails" class="font-weight-normal float-right">{{$book[0]->edition}}</span></h6>
+                                <hr class="style13">
                                 <h6 class="card-title mb-0 font-weight-bold">ISBN: <span id="isbnDetails" class="font-weight-normal float-right">{{$book[0]->isbn}}</span></h6>
                             </div>
                         </div>
