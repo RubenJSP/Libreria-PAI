@@ -9,14 +9,14 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <blockquote class="blockquote text-center">
-                    <p class="mb-0"><i class="fas fa-chart-bar"></i> Stats</p>
+                    <p class="mb-0"><i class="fas fa-chart-bar"></i> Loans</p>
                     <footer id="ft1" class="blockquote-footer">Shows the amount of borrowed books in the given dates</footer>
                 </blockquote>
                     <div id="loanChart">
                         <ve-line :data="chartData" :settings="chartSettings"></ve-line>
                     </div>
                     <blockquote class="blockquote text-center">
-                    <p class="mb-0"><i class="fas fa-chart-bar"></i> Returns</p>
+                    <p class="mb-0"><i class="fas fa-chart-bar"></i> Returned books</p>
                     <footer id="ft2" class="blockquote-footer">Shows the amount of borrowed and returned books in the given dates</footer>
                     </blockquote>
                     <div id="returnChart">

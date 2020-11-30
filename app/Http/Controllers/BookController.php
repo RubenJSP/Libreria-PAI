@@ -22,7 +22,6 @@ class BookController extends Controller
         $loans =Loan::with('users','books.Category')->get();
         $books = $bookData;
         $categories = Category::all();
-
         foreach($bookData as $index=>$bookdata){
             $books[$index]['status'] = "0";
             foreach($loans as $loan){ 
@@ -81,8 +80,8 @@ class BookController extends Controller
                   $fileName = 'book_cover'.$book->id.'.'.$file->getClientOriginalExtension();
                   $path = $request->file('cover')->storeAs('img/books',$fileName);
                   $book->cover = $fileName;
+                  $book->save();
               }
-              $book->save();
               return  redirect()->back()->with('success', 'Book created successfully');
           }
           return  redirect()->back()->with('error', "Sorry, couldn't create book");
@@ -96,10 +95,10 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show($book)
+    public function show(Book $book)
     {
         if(Auth::user()->hasPermissionTo('edit books')){
-            $books = Loan::with('users','books')->where('book_id',$book)->orderBy('loan_date','DESC')->get();
+            $books = Loan::with('users','books')->where('book_id',$book->id)->orderBy('loan_date','DESC')->get();
             return view('books.nombreVista',compact('books'));
         }
         return redirect()->back()->with("error","You don't have permissions"); 
