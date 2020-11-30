@@ -96,11 +96,12 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show($book)
+    public function show(Book $book)
     {
         if(Auth::user()->hasPermissionTo('edit books')){
-            $books = Loan::with('users','books')->where('book_id',$book)->orderBy('loan_date','DESC')->get();
-            return view('books.nombreVista',compact('books'));
+            $loans = Loan::with('users','books')->where('book_id',$book->id)->orderBy('loan_date','DESC')->get();
+            $book = Book::with('Category')->where('id',$book->id)->get();
+            return view('books.details',compact('book','loans'));
         }
         return redirect()->back()->with("error","You don't have permissions"); 
     }
