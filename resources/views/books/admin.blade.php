@@ -16,42 +16,16 @@
     	<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         	<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         		<div class="row no-gutters">
-        			<div id="detailsCard" class="col-md-4 col-12 p-3" style="display: none">
-        				<div class="shadow card mx-auto">
-                            <div class="col">
-                                <div class="text-right mr-4 mt-2">
-                                    <button type="button" class="close" aria-label="Close" onclick="hideDetails()">
-                                        <span aria-hidden="true" class="position-absolute"><i class="fas fa-times-circle"></i></span>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="card-img-top p-2" id="cardimgDetails"> 
-                            </div>
-                            <div class="card-body py-1 px-2">
-                                <h4 class="card-title mb-0 font-weight-bold"><p id="titleDetails" class="mb-1"></p></h4>
-                                <h5 class="card-title mb-0 font-weight-bold">Autor: <span id="autorDetails" class="font-weight-normal float-right"></span></h5>
-                                <h6 class="card-title mb-0 font-weight-bold">Year: <span id="yearDetails" class="font-weight-normal float-right"></span></h6>
-                                <h6 class="card-title mb-0 font-weight-bold">Category: <span id="categoryDetails" class="font-weight-normal float-right"></span></h6>
-                                <p class="mb-0 font-weight-bold text-justify">Description: <span class="card-text font-weight-normal" id="descriptionDetails" class="font-weight-normal float-right"></span></p>
-                                <h6 class="card-title mb-0 font-weight-bold">Pages: <span id="pagesDetails" class="font-weight-normal float-right"></span></h6>
-                                <h6 class="card-title mb-0 font-weight-bold">Editorial: <span id="editorialDetails" class="font-weight-normal float-right"></span></h6>
-                                <h6 class="card-title mb-0 font-weight-bold">Edition: <span id="editionDetails" class="font-weight-normal float-right"></span></h6>
-                                <h6 class="card-title mb-0 font-weight-bold">ISBN: <span id="isbnDetails" class="font-weight-normal float-right"></span></h6>
-                            </div>
-                            <div class="card-footer bg-transparent py-2">
-                            </div>   
-                        </div>
-        			</div>
-                    
         			<div class="col p-3">
-        				<table class="table table-sm">
+        				<table class="table table-striped table-hover table-sm">
 							<thead>
 								<tr>
 									<th scope="col">#</th>
 									<th scope="col">Title</th>
 									<th scope="col">Autor</th>
-									<th scope="col">Status</th>
+									<th scope="col">Year</th>
+                                    <th scope="col">ISBN</th>
+                                    <th scope="col">Status</th>
 									<th scope="col">Actions</th>
 								</tr>
 							</thead>
@@ -59,14 +33,22 @@
 								@if(@isset($books) && count($books)>0)
                     				@foreach ($books as $book)
 										<tr id="Book{{$book->id}}">
-											<th>1</th>
+											<th>{{$book->id}}</th>
 											<td>{{$book->title}}</td>
 											<td>{{$book->autor}}</td>
-											<td>@if($book->status==0)Available @else Borrowed @endif</td>
+                                            <td>{{$book->year}}</td>
+                                            <td>{{$book->isbn}}</td>
 											<td>
-												<button onclick="showDetails({{$book}},{{$book->category}})" type="button" class="btn btn-sm btn-info">
-													<i class="fas fa-info-circle"></i> Details
-												</button>
+                                                @if($book->status==0)
+                                                    <p class="text-success"><i class="fas fa-circle"></i> Available</p> 
+                                                @else
+                                                    <p class="text-warning"><i class="fas fa-circle"></i> Borrowed </p>
+                                                @endif
+                                            </td>
+											<td>
+                                                <a href="{{url('/books/details/'.$book->id)}}" class="btn btn-sm btn-info">
+                                                    <i class="fas fa-info-circle"></i> Details
+                                                </a>
 												<button onclick="editBook({{$book}})" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editBookModal">
 													<i class="fas fa-edit" ></i> Edit
 												</button>
@@ -402,55 +384,6 @@
             $('#editBookModal #pages').val(book.pages);
             $('#editBookModal #edition').val(book.edition);
             $('#editBookModal #editorial').val(book.editorial);
-        }
-
-    	function hideDetails(){
-            $('#imgDetails').remove();
-            $('#titleDetails').text();
-            $('#autorDetails').text();
-            $('#yearDetails').text();
-            $('#categoryDetails').text();
-            $('#descriptionDetails').text();
-            $('#pagesDetails').text();
-            $('#editorialDetails').text();
-            $('#editionDetails').text();
-            $('#isbnDetails').text();
-            $('#detailsCard').hide();
-    	}
-
-        function showDetails(book,category){
-
-        	$('#detailsCard').show(1000);
-
-            if($('#imgDetails')!=null){
-                $('#imgDetails').remove();
-            }
-            $('#btnNotAvaibleDetails').hide();
-            $('#titleDetails').text(book.title);
-            $('#autorDetails').text(book.autor);
-            $('#yearDetails').text(book.year);
-            $('#categoryDetails').text(category.name);
-            $('#descriptionDetails').text(book.description);
-            $('#pagesDetails').text(book.pages);
-            $('#editorialDetails').text(book.editorial);
-            $('#editionDetails').text(book.edition);
-            $('#isbnDetails').text(book.isbn);
-            var img = $('<img />', { 
-                id: 'imgDetails',
-                src: 'img/books/'+book['cover'],
-                class: 'card-img my-auto'
-            });
-            img.appendTo($('#cardimgDetails'));
-
-            if (book.status==0){
-                $('#detailsGet').show();
-                $('#idDetails').val(book.id);
-            }
-            else{
-                $('#detailsGet').hide();
-                $('#idDetails').val("");
-                $('#btnNotAvaibleDetails').show();  
-            }
         }
     </script>
 </x-slot>
