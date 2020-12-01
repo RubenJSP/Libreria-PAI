@@ -10,7 +10,7 @@
     </x-slot>
 
 <div class="py-3">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto sm:px-3 lg:px-3">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <div class="row row-cols-1 row-cols-md-4 no-gutters p-2">
                 @if(isset($books) && count($books)>0)

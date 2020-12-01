@@ -99,6 +99,7 @@ class BookController extends Controller
     {
         if(Auth::user()->hasPermissionTo('edit books')){
             $loans = Loan::with('users','books')->where('book_id',$book->id)->orderBy('loan_date','DESC')->get();
+            $book = Book::with('Category')->where('id',$book->id)->get();
             return view('books.details',compact('book','loans'));
         }
         return redirect()->back()->with("error","You don't have permissions"); 

@@ -1,4 +1,4 @@
-<x-app-layout>
+3<x-app-layout>
     <x-slot name="header">
         <div class="row">
             <div class="col-md-8 col-12">
@@ -13,7 +13,7 @@
     </x-slot>
 
     <div class="py-3">
-    	<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    	<div class="max-w-7xl mx-auto sm:px-3 lg:px-3">
         	<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         		<div class="row no-gutters">
                     
