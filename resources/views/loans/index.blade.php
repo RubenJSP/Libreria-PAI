@@ -73,6 +73,9 @@
                     @endforeach
                 @endif
             </div>
+            @if(isset($loans) && count($loans)>0)
+                {{$loans->links()}}
+            @endif
         </div>
     </div>
 </div>

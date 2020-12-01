@@ -20,7 +20,7 @@ class BookController extends Controller
     {
         $bookData = Book::paginate(10);
         //$loans =Loan::where('state',1)->with('users','books.Category')->get();
-        $loans =Loan::with('users','books.Category');
+        $loans = Loan::with('books')->where('state',1)->get();
         $books = $bookData;
         $categories = Category::all();
         foreach($bookData as $index=>$bookdata){
@@ -28,11 +28,10 @@ class BookController extends Controller
             foreach($loans as $loan){ 
                if($bookdata->id == $loan->books->id && $loan->state == 1)
                     $books[$index]['status'] = "1";
-                else if($loan->state == 0)
-                    $books[$index]['status'] = "0";      
            }
         }
         //return view('info',compact('books','categories','loans'));
+        //dd($books);
         if(Auth::user()->role_id == 1)
             return view('books.admin',compact('books','categories'));
         else

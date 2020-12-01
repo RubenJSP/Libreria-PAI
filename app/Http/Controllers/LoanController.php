@@ -99,7 +99,7 @@ class LoanController extends Controller
                 $loan = new Loan();
                 $loan->user_id = $user_id;
                 $loan->book_id = $request['id'];
-                $loan->state = true;
+                $loan->state = 1;
                 $loan->save();
                 return  redirect()->back()->with('success', 'Loan has been completed');
             }

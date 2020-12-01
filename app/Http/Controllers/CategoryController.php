@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\Paginator;
@@ -117,6 +118,10 @@ class CategoryController extends Controller
     {
         if(Auth::user()->hasPermissionTo('crud categories')){
             if($category){
+                $books = Book::where('category_id',$category->id)->get();
+                foreach ($books as $book) {
+                    $book->Update(['category_id'=> null]);
+                }
                 if($category->delete()){
                     return response()->json([
                         'message' => 'Category deleted successfully', 

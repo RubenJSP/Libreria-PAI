@@ -41,6 +41,9 @@
                     @endforeach
                 @endif
             </div>
+            @if(isset($books) && count($books)>0)
+                {{$books->links()}}
+            @endif
         </div>
     </div>
 </div>

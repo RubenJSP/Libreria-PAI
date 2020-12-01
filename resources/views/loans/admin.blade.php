@@ -106,7 +106,7 @@
                             <tbody>
                                 @if(@isset($loans) && count($loans)>0)
                                     @foreach ($loans as $loan)
-                                        <tr>
+                                        <tr id="Loan{{$loan->id}}">
                                             <th>{{$loan->id}}</th>
                                             <td>{{$loan->books->title}}</td>
                                             <td>{{$loan->users->name}}</td>
@@ -132,7 +132,7 @@
                                                 {{--<button type="button" class="btn btn-sm btn-primary">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </button>--}}
-                                                <button type="button" class="btn btn-sm btn-danger">
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="deleteRecord('Loan','{{url('loan')}}',{{$loan->id}})">
                                                     <i class="fas fa-trash-alt"></i> Delete
                                                 </button>
                                             </td>
