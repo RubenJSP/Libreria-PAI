@@ -26,7 +26,7 @@ class BookController extends Controller
         foreach($bookData as $index=>$bookdata){
             $books[$index]['status'] = "0";
             foreach($loans as $loan){ 
-               if($bookdata->id == $loan->books->id && $loan->state == 1)
+               if($bookdata->id == $loan->books->id)
                     $books[$index]['status'] = "1";
            }
         }

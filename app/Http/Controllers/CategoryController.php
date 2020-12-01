@@ -18,8 +18,9 @@ class CategoryController extends Controller
     public function index()
     {
         if(Auth::user()->hasPermissionTo('crud categories')){
+            $books = Book::all()->groupBy('category_id');
             $categories = Category::paginate(10);
-            return view('categories.admin',compact('categories'));
+            return view('categories.admin',compact('categories','books'));
         }
         return redirect()->back()->with("error","You don't have permissions");
     }
