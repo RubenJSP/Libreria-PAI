@@ -27,7 +27,7 @@
                     </div>
                     
                     <div class="col p-3">
-                        <table class="table table-striped table-hover table-sm">
+                        <table class="table table-responsive-md table-striped table-hover table-sm shadow">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -37,6 +37,15 @@
                                     <th scope="col">Status</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                    @if(@isset($loans) && count($loans)>0)
+                                        {{$loans->links()}}
+                                    @endif
+                                    </td>
+                                </tr>
+                            </tfoot>
                             <tbody>
                                 @if(@isset($loans) && count($loans)>0)
                                     @foreach ($loans as $loan)

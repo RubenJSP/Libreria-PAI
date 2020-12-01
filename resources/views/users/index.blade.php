@@ -18,7 +18,7 @@
                 <div class="row no-gutters">
                     
                     <div class="col p-3">
-                        <table class="table table-striped table-hover table-sm">
+                        <table class="table table-responsive-md table-striped table-hover table-sm shadow">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -28,10 +28,19 @@
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                    @if(@isset($users) && count($users)>0)
+                                        {{$users->links()}}
+                                    @endif
+                                    </td>
+                                </tr>
+                            </tfoot>
                             <tbody>
                                 @if(@isset($users) && count($users)>0)
                                     @foreach ($users as $user)
-                                        <tr>
+                                        <tr id="User{{$user->id}}">
                                             <th>{{$user->id}}</th>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
@@ -49,7 +58,7 @@
                                                 <button onclick="editUser({{$user}})" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editUserModal">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger">
+                                                <button onclick="deleteRecord('User','{{url('users')}}',{{$user->id}})" type="button" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-trash-alt"></i> Delete
                                                 </button>
                                             </td>
@@ -114,7 +123,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
                                 </div>
-                                <input type="password" id="password2" class="form-control" placeholder="Confirm password" aria-label="Password" aria-describedby="basic-addon1">
+                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Confirm password" aria-label="Password" aria-describedby="basic-addon1">
                             </div>
                         </div>
 

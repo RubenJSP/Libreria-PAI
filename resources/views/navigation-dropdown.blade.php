@@ -23,7 +23,7 @@
                             {{ __('Dashboard') }}
                         </x-jet-nav-link>
                     @endif
-                    <x-jet-nav-link href="{{ route('books') }}" :active="request()->routeIs('books')" :active="request()->routeIs('detailBooks')">
+                    <x-jet-nav-link href="{{ route('books') }}" :active="request()->routeIs('books','detailBooks')">
                         {{ __('Books') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('loans') }}" :active="request()->routeIs('loans')">
@@ -36,7 +36,7 @@
                     @endif
 
                     @if(Auth::user()->hasPermissionTo('crud users'))
-                        <x-jet-nav-link href="{{ url('users') }}" :active="request()->routeIs('users')">
+                        <x-jet-nav-link href="{{ url('users') }}" :active="request()->routeIs('users','detailUsers')">
                             {{ __('Users') }}
                         </x-jet-nav-link>
                     @endif

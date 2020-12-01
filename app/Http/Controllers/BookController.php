@@ -18,9 +18,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        $bookData = Book::all();
+        $bookData = Book::paginate(10);
         //$loans =Loan::where('state',1)->with('users','books.Category')->get();
-        $loans =Loan::with('users','books.Category')->paginate(10);
+        $loans =Loan::with('users','books.Category');
         $books = $bookData;
         $categories = Category::all();
         foreach($bookData as $index=>$bookdata){
@@ -34,9 +34,9 @@ class BookController extends Controller
         }
         //return view('info',compact('books','categories','loans'));
         if(Auth::user()->role_id == 1)
-            return view('books.admin',compact('books','categories','loans'));
+            return view('books.admin',compact('books','categories'));
         else
-            return view('books.index',compact('books','categories','loans'));
+            return view('books.index',compact('books','categories'));
     }
 
     /**
@@ -99,7 +99,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         if(Auth::user()->hasPermissionTo('edit books')){
-            $loans = Loan::with('users','books')->where('book_id',$book->id)->orderBy('loan_date','DESC')->get();
+            $loans = Loan::with('users','books')->where('book_id',$book->id)->orderBy('loan_date','DESC')->paginate(15);
             $book = Book::with('Category')->where('id',$book->id)->get();
             return view('books.details',compact('book','loans'));
         }

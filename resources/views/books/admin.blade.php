@@ -17,7 +17,7 @@
         	<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         		<div class="row no-gutters">
         			<div class="col p-3">
-        				<table class="table table-striped table-hover table-sm">
+        				<table class="table table-responsive-md table-striped table-hover table-sm shadow">
 							<thead>
 								<tr>
 									<th scope="col">#</th>
@@ -29,6 +29,15 @@
 									<th scope="col">Actions</th>
 								</tr>
 							</thead>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                    @if(@isset($books) && count($books)>0)
+                                        {{$books->links()}}
+                                    @endif
+                                    </td>
+                                </tr>
+                            </tfoot>
 							<tbody>
 								@if(@isset($books) && count($books)>0)
                     				@foreach ($books as $book)
@@ -90,7 +99,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Autor</label>
                                     <div class="input-group mb-3">
@@ -101,7 +110,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Category</label>
                                     <div class="input-group mb-3">
@@ -131,7 +140,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Year</label>
                                     <div class="input-group mb-3">
@@ -142,7 +151,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Edition</label>
                                     <div class="input-group mb-3">
@@ -156,7 +165,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Editorial</label>
                                     <div class="input-group mb-3">
@@ -167,7 +176,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">ISBN</label>
                                     <div class="input-group mb-3">
@@ -181,7 +190,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Pages</label>
                                     <div class="input-group mb-3">
@@ -192,7 +201,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Cover</label>
                                     <div class="input-group">
@@ -240,7 +249,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Autor</label>
                                     <div class="input-group mb-3">
@@ -251,7 +260,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Category</label>
                                     <div class="input-group mb-3">
@@ -281,7 +290,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Year</label>
                                     <div class="input-group mb-3">
@@ -292,7 +301,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Edition</label>
                                     <div class="input-group mb-3">
@@ -306,7 +315,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Editorial</label>
                                     <div class="input-group mb-3">
@@ -317,7 +326,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">ISBN</label>
                                     <div class="input-group mb-3">
@@ -331,7 +340,7 @@
                         </div>
                         
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Pages</label>
                                     <div class="input-group mb-3">
@@ -342,7 +351,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Cover</label>
                                     <div class="input-group">

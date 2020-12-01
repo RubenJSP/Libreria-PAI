@@ -33,18 +33,18 @@
             </header>
             <!-- Page Content -->
             <main>
-                <section>
+                <section class="max-w-7xl mx-auto pt-1 px-3">
                     <div class="row">
-                        <div class="col d-flex justify-content-center">
+                        <div class="col justify-content-center">
                             @if(session('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
                                     <strong>{{session('success')}}</strong> 
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                             @elseif(session('error'))
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                     <strong>{{session('error')}}</strong> 
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -72,5 +72,10 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="{{ asset('js/deleteRecord.js')}}"></script>
         {{(isset($scripts))?$scripts:''}}
+        <script type="text/javascript">
+            if($('.alert')) {
+                setTimeout(function(){$(".alert").hide();}, 3000);
+            }
+        </script>
     </body>
 </html>

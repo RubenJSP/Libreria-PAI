@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="col pl-3 pr-1">
+                    <div class="col pl-3 pr-1 sm:pt-1">
                         <div class="row no-gutters">
                             <div id="detailsCard2" class="col shadow-sm card mb-3">
                                 <div class="row no-gutters">
@@ -82,7 +82,7 @@
                 <div class="row no-gutters">
                    <div class="col p-3">
                         {{--$loans--}}
-                        <table class="table shadow table-striped table-hover table-sm">
+                        <table class="table table-responsive-md table-striped table-hover table-sm shadow">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -94,6 +94,15 @@
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                    @if(@isset($loans) && count($loans)>0)
+                                        {{$loans->links()}}
+                                    @endif
+                                    </td>
+                                </tr>
+                            </tfoot>
                             <tbody>
                                 @if(@isset($loans) && count($loans)>0)
                                     @foreach ($loans as $loan)
@@ -120,9 +129,9 @@
                                                 <button onclick="showDetails({{$loan}})" type="button" class="btn btn-sm btn-info">
                                                     <i class="fas fa-info-circle"></i> Details
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-primary">
+                                                {{--<button type="button" class="btn btn-sm btn-primary">
                                                     <i class="fas fa-edit"></i> Edit
-                                                </button>
+                                                </button>--}}
                                                 <button type="button" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-trash-alt"></i> Delete
                                                 </button>

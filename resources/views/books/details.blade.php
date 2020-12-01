@@ -20,28 +20,28 @@
                             </div>
                             <div class="card-body py-1 px-2">
                                 <h4 class="card-title mb-0 font-weight-bold"><p id="titleDetails" class="mb-1">{{$book[0]->title}}</p></h4>
-                                <hr>
+                                <hr class="my-2">
                                 <h6 class="card-title mb-0 font-weight-bold">Autor: <span id="autorDetails" class="font-weight-normal float-right">{{$book[0]->autor}}</span></h6>
-                                <hr>
+                                <hr class="my-2">
                                 <h6 class="card-title mb-0 font-weight-bold">Year: <span id="yearDetails" class="font-weight-normal float-right">{{$book[0]->year}}</span></h6>
-                                <hr>
+                                <hr class="my-2">
                                 <h6 class="card-title mb-0 font-weight-bold">Category: <span id="categoryDetails" class="font-weight-normal float-right">{{$book[0]->category->name}}</span></h6>
-                                <hr >
+                                <hr class="my-2">
                                 <p class="mb-0 font-weight-bold text-justify">Description: <span class="card-text font-weight-normal" id="descriptionDetails" class="font-weight-normal float-right">{{$book[0]->description}}</span></p>
-                                <hr >
+                                <hr class="my-2">
                                 <h6 class="card-title mb-0 font-weight-bold">Pages: <span id="pagesDetails" class="font-weight-normal float-right">{{$book[0]->pages}}</span></h6>
-                                <hr >
+                                <hr class="my-2">
                                 <h6 class="card-title mb-0 font-weight-bold">Editorial: <span id="editorialDetails" class="font-weight-normal float-right">{{$book[0]->editorial}}</span></h6>
-                                <hr >
+                                <hr class="my-2">
                                 <h6 class="card-title mb-0 font-weight-bold">Edition: <span id="editionDetails" class="font-weight-normal float-right">{{$book[0]->edition}}</span></h6>
-                                <hr >
+                                <hr class="my-2">
                                 <h6 class="card-title mb-2 font-weight-bold">ISBN: <span id="isbnDetails" class="font-weight-normal float-right">{{$book[0]->isbn}}</span></h6>
                             </div>
                         </div>
         			</div>
                     
         			<div class="col p-3">
-        				<table class="table table-striped table-hover table-sm">
+        				<table class="table table-responsive-md table-striped table-hover table-sm shadow">
 							<thead>
 								<tr>
 									<th scope="col">#</th>
@@ -52,6 +52,15 @@
                                     <th scope="col">Status</th>
 								</tr>
 							</thead>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                    @if(@isset($loans) && count($loans)>0)
+                                        {{$loans->links()}}
+                                    @endif
+                                    </td>
+                                </tr>
+                            </tfoot>
 							<tbody>
 								@if(@isset($loans) && count($loans)>0)
                     				@foreach ($loans as $loan)

@@ -1,4 +1,4 @@
-3<x-app-layout>
+<x-app-layout>
     <x-slot name="header">
         <div class="row">
             <div class="col-md-8 col-12">
@@ -18,15 +18,24 @@
         		<div class="row no-gutters">
                     
         			<div class="col p-3">
-        				<table class="table table-striped table-hover table-sm">
+        				<table class="table table-responsive-md table-striped table-hover table-sm shadow">
 							<thead>
 								<tr>
 									<th scope="col">#</th>
 									<th scope="col">Category</th>
-									<th scope="col">Description</th>
+									<th scope="col" class="w-50">Description</th>
                                     <th scope="col">Actions</th>
 								</tr>
 							</thead>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                    @if(@isset($categories) && count($categories)>0)
+                                        {{$categories->links()}}
+                                    @endif
+                                    </td>
+                                </tr>
+                            </tfoot>
 							<tbody>
 								@if(@isset($categories) && count($categories)>0)
                     				@foreach ($categories as $category)
@@ -38,7 +47,7 @@
 												<button onclick="editCategory({{$category}})" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editCategoryModal">
 													<i class="fas fa-edit" ></i> Edit
 												</button>
-												<button onclick="deleteRecord('Category','{{url('categories')}}',{{$category->id}})"type="button" class="btn btn-sm btn-danger">
+												<button onclick="deleteRecord('Category','{{url('categories')}}',{{$category->id}})" type="button" class="btn btn-sm btn-danger">
 													<i class="fas fa-trash-alt"></i> Delete
 												</button>
 											</td>
