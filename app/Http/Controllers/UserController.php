@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Loan;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Auth;
 class UserController extends Controller
@@ -19,7 +20,7 @@ class UserController extends Controller
     {
         if(Auth::user()->hasPermissionTo('view users')){
             $loans = Loan::with('users','books')->get();
-            $users = User::orderBy('role_id','ASC')->get();
+            $users = User::orderBy('role_id','ASC')->paginate(10);
             return view('users.index',compact('users','loans'));
         }
         return redirect()->back()->with("error","You don't have permissions"); 
@@ -74,7 +75,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         if(Auth::user()->hasPermissionTo('view users')){
-            $loans = Loan::with('users','books')->where('user_id',$user->id)->orderBy('loan_date','DESC')->get();
+            $loans = Loan::with('users','books')->where('user_id',$user->id)->orderBy('loan_date','DESC')->paginate(10);
             return view('users.details',compact('user','loans'));
         }
         return redirect()->back()->with("error","You don't have permissions"); 

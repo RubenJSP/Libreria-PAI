@@ -7,6 +7,7 @@ use App\Models\Loan;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\Paginator;
 use Auth;
 class BookController extends Controller
 {
@@ -19,7 +20,7 @@ class BookController extends Controller
     {
         $bookData = Book::all();
         //$loans =Loan::where('state',1)->with('users','books.Category')->get();
-        $loans =Loan::with('users','books.Category')->get();
+        $loans =Loan::with('users','books.Category')->paginate(10);
         $books = $bookData;
         $categories = Category::all();
         foreach($bookData as $index=>$bookdata){

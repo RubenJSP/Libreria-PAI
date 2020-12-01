@@ -25,12 +25,12 @@ class LoanController extends Controller
             if(Auth::user()->role_id == 1) //Si es administrador
                 $query = Loan::with('users','books.Category')
                 ->orderBy('state','DESC') //Ordernar por estado (No devuelto a devuelto)
-                ->orderBy('loan_date','DESC')->get(); //Y ordenar por fecha (Actual a antiguos)
+                ->orderBy('loan_date','DESC')->paginate(10); //Y ordenar por fecha (Actual a antiguos)
             else //Si es cliente
                 $query =Loan::with('users','books.Category')
                 ->where('user_id',Auth::user()->id)
                 ->orderBy('state','DESC')
-                ->orderBy('loan_date','DESC')->get();
+                ->orderBy('loan_date','DESC')->paginate(10);
 
                 $loans = $query;
                 foreach($query as $index=>$loan){
