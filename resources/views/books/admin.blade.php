@@ -67,6 +67,10 @@
 											</td>
 										</tr>
 									@endforeach
+                                @else
+                                <tr>
+                                    <td colspan="6" rowspan="3" class="text-center"><h1>No book records</h1></td>
+                                </tr>
 								@endif
 							</tbody>
 						</table>

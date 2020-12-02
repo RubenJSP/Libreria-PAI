@@ -16,7 +16,6 @@
     	<div class="max-w-7xl mx-auto sm:px-3 lg:px-3">
         	<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
         		<div class="row no-gutters">
-                    
         			<div class="col p-3">
         				<table class="table table-responsive-md table-striped table-hover table-sm shadow">
 							<thead>
@@ -24,12 +23,13 @@
 									<th scope="col">#</th>
 									<th scope="col">Category</th>
 									<th scope="col" class="w-50">Description</th>
+                                    <th scope="col">Books</th>
                                     <th scope="col">Actions</th>
 								</tr>
 							</thead>
                             <tfoot>
                                 <tr>
-                                    <td colspan="7">
+                                    <td colspan="5">
                                     @if(@isset($categories) && count($categories)>0)
                                         {{$categories->links()}}
                                     @endif
@@ -37,23 +37,40 @@
                                 </tr>
                             </tfoot>
 							<tbody>
-								@if(@isset($categories) && count($categories)>0)
+								@if(isset($categories) && count($categories)>0)
                     				@foreach ($categories as $category)
 										<tr id="Category{{$category->id}}">
 											<th>{{$category->id}}</th>
 											<td>{{$category->name}}</td>
 											<td>{{$category->description}}</td>
+                                            <td>
+                                                @if(isset($books[$category->id]))
+                                                    {{ count($books[$category->id]) }}
+                                                @else 
+                                                    0
+                                                @endif
+                                            </td>
 											<td>
 												<button onclick="editCategory({{$category}})" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editCategoryModal">
 													<i class="fas fa-edit" ></i> Edit
 												</button>
-												<button onclick="deleteRecord('Category','{{url('categories')}}',{{$category->id}})" type="button" class="btn btn-sm btn-danger">
-													<i class="fas fa-trash-alt"></i> Delete
-												</button>
+                                                @if(!isset($books[$category->id]))
+                                                    <button onclick="deleteRecord('Category','{{url('categories')}}',{{$category->id}})" type="button" class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                    </button>
+                                                @else
+                                                    <button type="button" class="btn btn-sm btn-secondary" disabled>
+                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                    </button>
+                                                @endif
 											</td>
 										</tr>
 									@endforeach
-								@endif
+								@else
+                                    <tr>
+                                        <td colspan="5" rowspan="3" class="text-center"><h1>No category records</h1></td>
+                                    </tr>
+                                @endif
 							</tbody>
 						</table>
         			</div>

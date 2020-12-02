@@ -81,7 +81,6 @@
 
                 <div class="row no-gutters">
                    <div class="col p-3">
-                        {{--$loans--}}
                         <table class="table table-responsive-md table-striped table-hover table-sm shadow">
                             <thead>
                                 <tr>
@@ -138,6 +137,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="7" rowspan="3" class="text-center"><h1>No loan records</h1></td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>

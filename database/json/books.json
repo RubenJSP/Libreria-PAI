@@ -8,7 +8,7 @@
         "editorial":"Del Rey Books",
         "edition":"1",
         "autor":"Eric Nylund",
-        "cover":"book.png",
+        "cover":"book_cover1.jpg",
         "category_id":"3"
     },
     {
@@ -20,7 +20,7 @@
         "editorial":"Viking Press",
         "edition":"1",
         "autor":"Stephen King",
-        "cover":"book.png",
+        "cover":"book_cover2.jpg",
         "category_id":"1"
     },
     {
@@ -32,7 +32,7 @@
         "editorial":"La Factoría de Ideas",
         "edition":"4",
         "autor":"Robert Bloch",
-        "cover":"book.png",
+        "cover":"book_cover3.jpg",
         "category_id":"1"
     },
     {
@@ -44,7 +44,7 @@
         "editorial":"La Factoría de Ideas",
         "edition":"2",
         "autor":"Robert Bloch",
-        "cover":"book.png",
+        "cover":"book_cover4.jpg",
         "category_id":"1"
     },
     {
@@ -56,7 +56,7 @@
         "editorial" : "Planeta",
         "edition" : 1,
         "autor" : "Stephen King",
-        "cover" : "book.png",
+        "cover" : "book_cover5.jpg",
         "category_id": "1"
     },
     {
@@ -68,7 +68,7 @@
         "editorial" : "Penguin Random House",
         "edition" : 1,
         "autor" : "Andy Weir",
-        "cover" : "book.png",
+        "cover" : "book_cover6.jpg",
         "category_id": "3"
     },
     {
@@ -80,7 +80,7 @@
         "editorial" : "Anaya",
         "edition" : 1,
         "autor" : "Mark Twain",
-        "cover" : "book.png",
+        "cover" : "book_cover7.jpg",
         "category_id": "3"
     },
     {
@@ -91,8 +91,8 @@
         "isbn":"9786070749094",
         "editorial":"Austral",
         "edition":"1",
-        "autor":"Jules Verne",
-        "cover":"book.png",
+        "autor":"Julio Verne",
+        "cover":"book_cover8.jpg",
         "category_id":"3"
     },
     {
@@ -104,7 +104,7 @@
         "editorial":"Penguin Random House",
         "edition":"1",
         "autor":"Sofía Segovia",
-        "cover":"book.png",
+        "cover":"book_cover9.jpg",
         "category_id":"5"
     },
     {
@@ -116,7 +116,7 @@
         "editorial":"Planeta",
         "edition":"1",
         "autor":"Sophie Goldberg",
-        "cover":"book.png",
+        "cover":"book_cover10.jpg",
         "category_id":"5"
     },
     {
@@ -128,7 +128,19 @@
         "editorial":"Planeta",
         "edition":"1",
         "autor":"Rodolfo Naró",
-        "cover":"book.png",
+        "cover":"book_cover11.jpg",
         "category_id":"2"
+    },
+    {
+        "title":"The day my Butt Went Psycho",
+        "description":"A story that you and your butt will never forget! Join Zack on his epic journey across the Great Windy Desert and through the Brown Forest, to reclaim his runaway butt. (Based on a true story).",
+        "year":2019,
+        "pages":240,
+        "isbn":"9781338546743",
+        "editorial":"Scholastic",
+        "edition":"1",
+        "autor":"Andy Griffiths",
+        "cover":"book_cover12.jpg",
+        "category_id":"4"
     }
 ]   

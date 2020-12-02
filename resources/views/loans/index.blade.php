@@ -12,32 +12,35 @@
 <div class="py-3">
     <div class="max-w-7xl mx-auto sm:px-3 lg:px-3">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <div class="row row-cols-1 row-cols-md-4 no-gutters p-2">
-                @if(@isset($loans) && count($loans)>0)
+            @if(@isset($loans) && count($loans)>0)
+                <div class="row row-cols-1 row-cols-lg-5 row-cols-md-4 row-cols-sm-2 no-gutters p-2">
                     @foreach ($loans as $loan)
-                        <div class="col mb-4 d-flex p-2">
+                        <div class="col mb-2 d-flex p-2">
                             <div class="shadow card mx-auto" style="width: 16rem;">
-                                <button><img src="{{asset('img/books/'.$loan->books->cover)}}" class="card-img-top p-2" alt="..."></button>
+                                <div class="col d-flex justify-content-center bg-light">
+                                    <img src="{{asset('img/books/'.$loan->books->cover)}}" class="" alt="..." style="height:250px">
+                                </div>
+                                <hr class="mt-0 mb-1">
                                 <div class="card-body py-1 px-2">
                                 	@if($loan->state == 0)
                                    		<h6 class="text-success text-right  my-0">
-	                                    	<div class="bg-success rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Returned
-	                                    </h6>
-	                                @elseif($loan->state == 1)
+                                        	<i class="fas fa-circle"></i> Returned
+                                        </h6>
+                                    @elseif($loan->state == 1)
                                         @if(isset($loan->on_time) && $loan->on_time == 0)
                                             <h6 class="text-danger text-right  my-0">
-	                                           <div class="bg-danger rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Borrowed
+                                               <i class="fas fa-circle"></i> Borrowed
                                             </h6>
                                         @else
                                             <h6 class="text-warning text-right  my-0">
-                                                <div class="bg-warning rounded-circle d-inline-block" style="width: 10px; height: 10px"></div> Borrowed
+                                                <i class="fas fa-circle"></i> Borrowed
                                             </h6>
                                         @endif
-	                                @endif  
+                                    @endif  
                                     <h5 class="card-title break-text"><b>{{$loan->books->title}}</b></h5>
                                     <div class="row no-gutters">
                                         <div class="col">
-                                            <h6>Loan date:</h6>
+                                            <h6 class="font-weight-bold">Loan date:</h6>
                                         </div>
                                         <div class="col">
                                             <h6 class="text-right">{{$loan->loan_date}}</h6>
@@ -45,13 +48,16 @@
                                     </div>
                                     <div class="row no-gutters">
                                         <div class="col">
-                                            <h6>@if($loan->state == 1) Return date:@else Returned: @endif</h6>
+                                            <h6 class="font-weight-bold">@if($loan->state == 1) Return date:@else Returned: @endif</h6>
                                         </div>
                                         <div class="col">
-                                            <h6 class="text-right" title="Tentative return date">{{$loan->return_date}}*</h6>
-                                            @if(isset($loan->on_time) && $loan->on_time == 0)   
-                                               {{--SI EL LIBRO SE ENTREGÓ TARDE--}}
-                                            @endif
+                                            <h6 class="text-right" title="Tentative return date">
+                                                {{$loan->return_date}}@if($loan->state == 1)**@endif
+
+                                            </h6>
+                                            {{--@if(isset($loan->on_time) && $loan->on_time == 0)   
+                                               SI EL LIBRO SE ENTREGÓ TARDE
+                                            @endif--}}
                                         </div>
                                     </div>
                                 </div>
@@ -67,14 +73,17 @@
                                     	<button type="submit" disabled class="btn btn-block btn-disabled border-dark">Back</button>
                                     @endif
                                 </div>
-                                
                             </div>
                         </div>
                     @endforeach
-                @endif
-            </div>
-            @if(isset($loans) && count($loans)>0)
-                {{$loans->links()}}
+                </div>
+                <div class="px-3 pb-3">
+                    {{$loans->links()}}
+                </div>
+            @else
+                <div class="row no-gutters d-flex justify-content-center py-3">
+                    <h1 class="text-black-50">There are no books here</h1>
+                </div>
             @endif
         </div>
     </div>
