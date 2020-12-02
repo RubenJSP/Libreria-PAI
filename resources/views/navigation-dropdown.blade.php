@@ -12,10 +12,10 @@
                         {{ url('/books') }}
                     @endif
                     ">
-                       <x-jet-application-mark class="block h-9 w-auto" />
+                        <img src="{{url('img/logo.png')}}" class="block h-12 w-auto" alt="">
+                       {{--<x-jet-application-mark class="block h-9 w-auto" />--}}
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(Auth::user()->hasPermissionTo('view dashboard'))

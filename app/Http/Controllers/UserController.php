@@ -112,8 +112,9 @@ class UserController extends Controller
            } 
            $user = User::find($request['id']);
            if($user!=null){
-               $user->Update($request->all());
+               $user->removeRole($user->role_id);
                $user->assignRole($request['role_id']);
+               $user->Update($request->all());
                return  redirect()->back()->with('success', 'The user has been updated');
            }
            return redirect()->back()->with('error', 'Sorry, user not updated, try again'); 
