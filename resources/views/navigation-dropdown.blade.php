@@ -12,7 +12,7 @@
                         {{ url('/books') }}
                     @endif
                     ">
-                        <img src="{{url('img/logo.png')}}" class="block h-12 w-auto" alt="">
+                        <img src="{{url('img/logo.svg')}}" class="block h-12 w-auto" alt="">
                        {{--<x-jet-application-mark class="block h-9 w-auto" />--}}
                     </a>
                 </div>
