@@ -115,11 +115,14 @@ class UserController extends Controller
                $user->removeRole($user->role_id);
                $user->assignRole($request['role_id']);
                $user->Update($request->all());
+               if($user->role_id != 1 && Auth::user()->id == $user->id)
+                   return redirect('books')->with("error","Dear admin, you are downgraded!");
+
                return  redirect()->back()->with('success', 'The user has been updated');
            }
            return redirect()->back()->with('error', 'Sorry, user not updated, try again'); 
          }
-         return redirect()->back()->with("error","You don't have permissions");
+         return redirect('books')->with("error","You don't have permissions");
     }
 
     /**
