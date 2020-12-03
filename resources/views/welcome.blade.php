@@ -27,27 +27,32 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen  sm:items-center sm:pt-0">
-                @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                        @endif
-                    @endif
-                </div>
-            @endif
-            <div class="mt-8 sm:rounded-lg">
-                <div class="row text-center">
+        <div class="relative flex items-top justify-center min-h-screen  sm:items-center sm:pt-0 bg-light">
+            <div class="sm:rounded-lg">
+                <div class="row text-center py-4 px-5 border rounded bg-white shadow">
                     <div class="col-xs-2">
                         <figure>
                             <img src="{{url('img/logo.svg')}}" class="img-fluid" alt="Responsive image">
                             <h1>Konoha Library</h1>
                         </figure>
+                        @if (Route::has('login'))
+                            @auth
+                                <div class="row pt-5">
+                                    <div class="col">
+                                        <a href="" class="btn btn-primary btn-block">Dashboard</a>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="row pt-5">
+                                    <div class="col">
+                                        <a href="{{ route('login') }}" class="btn btn-primary btn-block">Login</a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="{{ route('register') }}" class="btn btn-secondary btn-block">Register</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     </div> 
                 </div>
             </div>
